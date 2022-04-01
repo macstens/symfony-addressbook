@@ -1,0 +1,74 @@
+{% extends '@App/layout.html.twig' %}
+
+    {% block content %}
+
+    <div class="row">
+        <div class="col-xl-6 offset-xl-3 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ title }} contact</h2>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                        {{ form_errors(form) }}
+                        <label class="form-label">First name</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.firstname, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.firstname) }}
+                        </div>
+                        <label class="form-label">Last name</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.lastname, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.lastname) }}
+                        </div>
+                        <label class="form-label">Street and number</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.streetAndNumber, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.streetAndNumber) }}
+                        </div>
+                        <label class="form-label">ZIP</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.zip, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.zip) }}
+                        </div>
+                        <label class="form-label">City</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.city, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.city) }}
+                        </div>
+                        <label class="form-label">Country</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.country, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.country) }}
+                        </div>
+                        <label class="form-label">Phone number</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.phonenumber, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.phonenumber) }}
+                        </div>
+                        <label class="form-label">Birthday</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.birthday, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.birthday) }}
+                        </div>
+                        <label class="form-label">Email</label>
+                        <div class="input-group mb-3">
+                            {{ form_widget(form.email, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <label class="form-label">Picture</label>
+                        <div class="input-group mb-3">
+                        {% if form.picture is not empty %}
+                        {{ picture }}
+                        {% endif %}
+                            {{ form_widget(form.picture, {attr: {class: 'form-control'}}) }}
+                            {{ form_errors(form.picture) }}
+                        </div>
+                        <button class="btn btn-primary">{{ buttonAction }}</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

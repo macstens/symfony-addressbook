@@ -1,0 +1,96 @@
+{% extends '@App/layout.html.twig' %}
+
+    {% block content %}
+        <div class="row my-3">
+            <div class="col col-xl-6 offset-xl-3">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="btn btn-light" href="{{ path('contacts_list') }}">Back to list</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-xl-6 offset-xl-3">
+                {% if contact is null %}
+                    <h2>Unfortunately this contact could not be found</h2>
+                {% else %}
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <h3 class="card-title">{{ contact.displayName() }}</h3>
+                                </div>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <div class="col-auto">
+                                        <a type="button" href="{{ path('contact_add') }}" class="btn btn-primary btn--create"><em class="fa fa-plus me-2"></em>Create new contact</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered table-list">
+                                <tbody>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <tr>
+                                        <td>Actions</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
+                                            <a class="btn btn-danger" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>Street and number</td>
+                                        <td>{{ contact.streetAndNumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ZIP</td>
+                                        <td>{{ contact.zip }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td>{{ contact.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>{{ contact.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone number</td>
+                                        <td>{{ contact.phonenumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Birthday</td>
+                                        <td>{{ contact.birthday|date("d/m/Y") }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{ contact.email }}</td>
+                                    </tr>
+                                    {% if contact.picture is not empty %}
+                                        <tr>
+                                            <td>Picture</td>
+                                            <td><img src="{{ asset('uploads/profile-images/' ~ contact.picture) }}" width="150" height="150" class="img-fluid"></td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="row my-3">
+            <div class="col col-xl-6 offset-xl-3">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="btn btn-light" href="{{ path('contacts_list') }}">Back to list</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    {% endblock %}
