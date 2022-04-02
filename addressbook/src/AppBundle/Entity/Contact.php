@@ -104,7 +104,6 @@ class Contact
     private $picture;
 
     public function __construct() {
-        $this->articles = new ArrayCollection();
     }
 
     /**

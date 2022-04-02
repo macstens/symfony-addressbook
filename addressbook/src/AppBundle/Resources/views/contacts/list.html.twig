@@ -5,11 +5,16 @@
     <div class="row">
 
         <div class="col-12 col-xxl-10 offset-xxl-1">
-            {% for message in app.flashes('notice') %}
-                <div class="alert alert-info mt-3">
-                    {{ message }}
-                </div>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} mt-3 app-flash--{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
+            {% if app.flashes('success') is not empty %}
+                <script>fireConfettiCannon();</script>
+            {% endif %}
 
             {% if contacts is not empty %}
                 <div class="card mt-3">

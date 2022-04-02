@@ -86,7 +86,7 @@ class ContactsController extends Controller
             $dbManager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'Contact was successfully added!'
             );
 
@@ -114,7 +114,7 @@ class ContactsController extends Controller
 
         if ($contact === null) {
             $this->addFlash(
-                'notice',
+                'error',
                 'Contact not found'
             );
             return $this->redirectToRoute('contacts_list');
@@ -136,7 +136,7 @@ class ContactsController extends Controller
             $dbManager->flush();
 
             $this->addFlash(
-                'notice',
+                'success',
                 'Contact was successfully edited!'
             );
 
@@ -176,7 +176,7 @@ class ContactsController extends Controller
         $dbManager->flush();
 
         $this->addFlash(
-            'notice',
+            'info',
             'Contact was successfully deleted!'
         );
 

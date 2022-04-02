@@ -1,6 +1,15 @@
 {% extends '@App/layout.html.twig' %}
 
     {% block content %}
+    <div class="row my-3">
+        <div class="col col-xl-6 offset-xl-3">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="btn btn-light" href="{{ path('contacts_list') }}">Back to list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-xl-6 offset-xl-3 mt-3">
@@ -59,7 +68,7 @@
                         <label class="form-label">Picture</label>
                         <div class="input-group mb-3">
                         {% if form.picture is not empty %}
-                        {{ picture }}
+                            {{ picture }}
                         {% endif %}
                             {{ form_widget(form.picture, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.picture) }}
@@ -68,6 +77,16 @@
                     {{ form_end(form) }}
                 </div>
             </div>
+        </div>
+    </div>
+        
+    <div class="row my-3">
+        <div class="col col-xl-6 offset-xl-3">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="btn btn-light" href="{{ path('contacts_list') }}">Back to list</a>
+                </li>
+            </ul>
         </div>
     </div>
 
