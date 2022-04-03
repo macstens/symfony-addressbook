@@ -12,9 +12,6 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-            {% if app.flashes('success') is not empty %}
-                <script>fireConfettiCannon();</script>
-            {% endif %}
 
             {% if contacts is not empty %}
                 <div class="card mt-3">
@@ -24,12 +21,9 @@
                                 <h3 class="card-title">Contacts</h3>
                             </div>
                             <div class="col-auto">
-                                {#<form class="navbar-form navbar-left">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Filter for a contact">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form> #}
+                                {{ form|raw }}
+                            </div>
+                            <div class="col-auto">
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a type="button" href="{{ path('contact_add') }}" class="btn btn-primary btn--create">Create new contact</a>
                                 {% endif %}
@@ -41,14 +35,8 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    {# <th>Street and number</th>
-                                    <th>ZIP</th> #}
                                     <th>City</th>
-                                    {# <th>Country</th>
-                                    <th>Phone number</th>
-                                    <th>Birthday</th> #}
                                     <th>Email</th>
-                                    {# <th>Picture</th> #}
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -56,14 +44,8 @@
                             {% for contact in contacts %}
                                 <tr>
                                     <td>{{ contact.displayName() }}</td>
-                                    {#<td>{{ contact.streetAndNumber }}</td>
-                                    <td>{{ contact.zip }}</td>#}
                                     <td>{{ contact.city }}</td>
-                                    {#<td>{{ contact.country }}</td>
-                                    <td>{{ contact.phonenumber }}</td>
-                                    <td>{{ contact.birthday|date("d/m/Y") }}</td>#}
                                     <td>{{ contact.email }}</td>
-                                    {#<td>{{ contact.picture }}</td>#}
                                     <td align="center">
                                         <a class="btn btn-secondary" title="View card" href="{{ path('contact_detail', { 'id' : contact.id }) }}"><em class="fa fa-eye"></em></a>
                                         <a class="btn btn-primary" title="Edit" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
@@ -79,13 +61,21 @@
             {% else %}
                 <div class="card mt-3">
                     <div class="card-header">
-                        <h3 class="card-title">There are no contacts in the database</h3>
+                        <div class="row justify-content-between">
+                            <div class="col-auto">
+                                <h3 class="card-title">No contacts found</h3>
+                            </div>
+                            <div class="col-auto">
+                                {{ form|raw }}
+                            </div>
+                        </div>
                     </div>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <div class="card-text">
                                 <p>But there is hope! Grease your keyboard, get ready:</p>
                                 <a href="{{ path('contact_add') }}" class="btn btn-primary btn--create">Create new contact</a>
+                                <a href="{{ path('contacts_list') }}" class="btn btn-secondary">Back to list</a>
                             </div>
                         </div>
                     {% endif %}

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
 use AppBundle\Form\ContactType;
+use AppBundle\Repository\ContactRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,16 +20,23 @@ class ContactsController extends Controller
 {
     /**
      * @Route("/admin/contacts", name="contacts_list")
+     * also used for search results
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request = null)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-        $contacts = $this->getDoctrine()
-            ->getRepository(Contact::class)
-            ->findAllOrderedByLastName();
 
-        return $this->render('@App/contacts/list.html.twig', ['contacts' => $contacts]);
+        $contactsRepo = $this->getDoctrine()->getRepository(Contact::class);
+        $query = $request->query->get('q');
+        if(!empty($query)) {
+            $contacts = $contactsRepo->findBySearchQuery($query);
+        } else {
+            $contacts = $contactsRepo->findAllOrderedByLastName();
+        }
+
+        $searchForm = $this->render('@App/form/form_search.html.twig', ['query' => $query]);
+        return $this->render('@App/contacts/list.html.twig', ['contacts' => $contacts, 'form' => $searchForm->getContent()]);
     }
 
     /**
