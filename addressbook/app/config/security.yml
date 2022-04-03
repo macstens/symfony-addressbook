@@ -12,9 +12,6 @@ security:
         in_memory:
             memory:
                 users:
-                    user:
-                        password: $2y$12$Ozw4TdUk70Awg7yQdAhC5OL8ZZHkbsGne/zcQh.fL.HLzkPp35gWy
-                        roles: 'ROLE_USER'
                     admin:
                         password: $2y$12$4tB2d.vLhIFv7XMewdPrNutyn7yydpnKOPmThT8FpU8oewIZQn8mC
                         roles: 'ROLE_ADMIN'

@@ -72,22 +72,8 @@ class ContactsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
-            
-            /** @var UploadedFile $pictureFile */
-            $pictureFile = $form->get('picture')->getData();
-            if($pictureFile) {
-                // create unique file name, independent from uploaded filename
-                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid(). '.' . $pictureFile->guessExtension();
 
-                $pictureFile->move(
-                    $this->getParameter('uploads_directory'), // from config.yml
-                    $newFilename
-                );
-                $contact->setPicture($newFilename);
-            }
+            $this->addImage($form->get('picture')->getData(), $contact);
 
             $dbManager = $this->getDoctrine()->getManager();
             $dbManager->persist($contact);
@@ -131,16 +117,24 @@ class ContactsController extends Controller
         // from https://symfony.com/doc/3.4/controller/upload_file.html
         // When creating a form to edit an already persisted item, the file form type still expects a File instance. As the persisted entity now contains only the relative file path, you first have to concatenate the configured upload path with the stored filename and create a new File class:
         try{
-            $contact->setPicture(
-                new File($this->getParameter('uploads_directory') . '/' . $contact->getPicture())
-            );
-        } catch (FileNotFoundException $exception) {}
+            $pictureFileName = $contact->getPicture();
+            if(!empty($pictureFileName) && !is_null($pictureFileName)) {
+                $contact->setPicture(
+                    new File($this->getParameter('uploads_directory') . '/' . $pictureFileName)
+                );
+            }
+        } catch (FileNotFoundException $exception) {
+            throw $exception;
+        }
         
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addImage($form->get('picture')->getData(), $contact);
+            
             $dbManager = $this->getDoctrine()->getManager();
+            $dbManager->persist($contact);
             $dbManager->flush();
 
             $this->addFlash(
@@ -186,11 +180,28 @@ class ContactsController extends Controller
         $dbManager->flush();
 
         $this->addFlash(
-            'info',
+            'success',
             'Contact was successfully deleted!'
         );
 
         return $this->redirectToRoute('contacts_list');
     }
 
+
+    private function addImage(UploadedFile $pictureFile = null, Contact $contact = null)
+    {
+        if($pictureFile) {
+            // create unique file name, independent from uploaded filename
+            $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            $safeFilename = md5($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid(). '.' . $pictureFile->guessExtension();
+
+            $pictureFile->move(
+                $this->getParameter('uploads_directory'), // from config.yml
+                $newFilename
+            );
+            $contact->setPicture($newFilename);
+        }
+    }
 }

@@ -27,10 +27,6 @@ Login
  username : admin
  password : kitten
 
- username : user
- password : user
-
-
 Used technologies
 --------------
 
