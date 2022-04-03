@@ -7,7 +7,7 @@ Installation
 
     https://github.com/macstens/symfony-addressbook
 
-2. Run installation scripts to install composer, create database based on fixtures data already provided, install yarn packages and create first encore webpack build
+2. Run installation scripts to install composer, create database based on fixtures data already provided, install yarn packages and create first encore webpack build. Note: skip all questions by composer as a local environment will be created and everything else is already set in the config files.
 
 	sh bin/install.sh
 
