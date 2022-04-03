@@ -175,9 +175,11 @@ class ContactsController extends Controller
 
         // remove file from system
         $pictureFileName = $contact->getPicture();
-        $picturePath = $this->getParameter('uploads_directory') . '/' . $pictureFileName;
-        $fileSystem = new FileSystem();
-        $fileSystem->remove([$path]);
+        if(!empty($pictureFileName) && !is_null($pictureFileName)) {
+            $picturePath = $this->getParameter('uploads_directory') . '/' . $pictureFileName;
+            $fileSystem = new FileSystem();
+            $fileSystem->remove([$picturePath]);
+        }
 
         $dbManager = $this->getDoctrine()->getManager();
         $dbManager->remove($contact);

@@ -7,19 +7,15 @@ Installation
 
     https://github.com/macstens/symfony-addressbook
 
-2. Execute composer
-
-	composer install
-
-3. Copy path to sqlite database to /app/config/parameters.yml:
-
-    database_path: '%kernel.project_dir%/var/data/addressbook.db'
-
-4. Run installation script to create database based on fixtures data already provided
+2. Run installation scripts to install composer, create database based on fixtures data already provided, install yarn packages and create first encore webpack build
 
 	sh bin/install.sh
 
-5. Run server and go to http://localhost:8000/ 
+3. Run encore when needed
+
+    yarn run encore dev
+
+4. Run server and go to http://localhost:8000/ 
 
     bin/console server:run
 
