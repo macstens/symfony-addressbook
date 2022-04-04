@@ -1,4 +1,4 @@
-
+const confetti = require('canvas-confetti').default;
 
 module.exports = function(name) {
     function fire(particleRatio, opts) {

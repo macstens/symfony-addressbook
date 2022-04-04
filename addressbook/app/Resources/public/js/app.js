@@ -1,6 +1,5 @@
 const $ = require('jquery');
 //require('bootstrap');
-//require('canvas-confetti');
 
 var party = require('./party');
 

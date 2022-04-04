@@ -18,9 +18,9 @@
                 {% else %}
                     <div class="card">
                         <div class="card-header">
-                            <div class="row justify-content-between">
+                            <div class="row justify-content-between align-items-center">
                                 <div class="col-auto">
-                                    <h3 class="card-title">{{ contact.displayName() }}</h3>
+                                    <h3 class="card-title h5 my-0"><em class="fa fa-id-card me-1"></em> {{ contact.displayName() }}</h3>
                                 </div>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <div class="col-auto">
@@ -30,17 +30,60 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-striped table-bordered table-list">
+                        <div class="row">
+                            {% if contact.picture is not empty %}
+                            <div class="form-group mb-3 col-12">
+                                <div class="form-label text-muted">Picture</div>
+                                <img src="{{ asset('uploads/profile-images/' ~ contact.picture) }}" width="150" height="150" class="img-fluid img-thumbnail">
+                            </div>
+                            {% endif %}
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">First name</div>
+                                {{ contact.firstname }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Last name</div>
+                                {{ contact.lastname }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Street and number</div>
+                                {{ contact.streetAndNumber }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">ZIP</div>
+                                {{ contact.zip }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">City</div>
+                                {{ contact.city }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Country</div>
+                                {{ contact.country }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Phone number</div>
+                                {{ contact.phonenumber }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Birthday</div>
+                                {{ contact.birthday|date("d/m/Y") }}
+                            </div>
+                            <div class="form-group mb-3 col-6">
+                                <div class="form-label text-muted">Email</div>
+                                {{ contact.email }}
+                            </div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <div class="form-group">
+                                <div class="form-label">Actions</div>
+                                    <a class="btn btn-primary btn--action" title="Edit contact" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
+                                    <a class="btn btn-danger btn--action" title="Delete contact" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                            <table class="table table-striped table-bordered table-list d-none">
                                 <tbody>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                    <tr>
-                                        <td>Actions</td>
-                                        <td>
-                                            <a class="btn btn-primary" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
-                                            <a class="btn btn-danger" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
-                                        </td>
-                                    </tr>
-                                    {% endif %}
                                     <tr>
                                         <td>Street and number</td>
                                         <td>{{ contact.streetAndNumber }}</td>
@@ -74,6 +117,15 @@
                                             <td>Picture</td>
                                             <td><img src="{{ asset('uploads/profile-images/' ~ contact.picture) }}" width="150" height="150" class="img-fluid"></td>
                                         </tr>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <tr>
+                                        <td>Actions</td>
+                                        <td>
+                                            <a class="btn btn-primary btn--action" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
+                                            <a class="btn btn-danger btn--action" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
+                                        </td>
+                                    </tr>
                                     {% endif %}
                                 </tbody>
                             </table>

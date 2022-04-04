@@ -15,57 +15,57 @@
         <div class="col-xl-6 offset-xl-3 mt-3">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">{{ title }} contact</h2>
+                    <h2 class="card-title h5 my-0">{{ title }} contact</h2>
                 </div>
                 <div class="card-body">
                     {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
                         {{ form_errors(form) }}
-                        <label class="form-label">First name</label>
+                        <label class="form-label text-muted">First name</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.firstname, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.firstname) }}
                         </div>
-                        <label class="form-label">Last name</label>
+                        <label class="form-label text-muted">Last name</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.lastname, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.lastname) }}
                         </div>
-                        <label class="form-label">Street and number</label>
+                        <label class="form-label text-muted">Street and number</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.streetAndNumber, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.streetAndNumber) }}
                         </div>
-                        <label class="form-label">ZIP</label>
+                        <label class="form-label text-muted">ZIP</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.zip, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.zip) }}
                         </div>
-                        <label class="form-label">City</label>
+                        <label class="form-label text-muted">City</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.city, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.city) }}
                         </div>
-                        <label class="form-label">Country</label>
+                        <label class="form-label text-muted">Country</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.country, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.country) }}
                         </div>
-                        <label class="form-label">Phone number</label>
+                        <label class="form-label text-muted">Phone number</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.phonenumber, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.phonenumber) }}
                         </div>
-                        <label class="form-label">Birthday</label>
+                        <label class="form-label text-muted">Birthday</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.birthday, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.birthday) }}
                         </div>
-                        <label class="form-label">Email</label>
+                        <label class="form-label text-muted">Email</label>
                         <div class="input-group mb-3">
                             {{ form_widget(form.email, {attr: {class: 'form-control'}}) }}
                             {{ form_errors(form.email) }}
                         </div>
-                        <label class="form-label">Picture</label>
+                        <label class="form-label text-muted">Picture</label>
                         <div class="input-group mb-3">
                         {% if form.picture is not empty %}
                             {{ picture }}

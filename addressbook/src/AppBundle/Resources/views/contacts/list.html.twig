@@ -47,9 +47,9 @@
                                     <td>{{ contact.city }}</td>
                                     <td>{{ contact.email }}</td>
                                     <td align="center">
-                                        <a class="btn btn-secondary" title="View card" href="{{ path('contact_detail', { 'id' : contact.id }) }}"><em class="fa fa-eye"></em></a>
-                                        <a class="btn btn-primary" title="Edit" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
-                                        <a class="btn btn-danger" title="Delete" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
+                                        <a class="btn btn-secondary btn--action" title="View card" href="{{ path('contact_detail', { 'id' : contact.id }) }}"><em class="fa fa-user"></em></a>
+                                        <a class="btn btn-primary btn--action" title="Edit" href="{{ path('contact_edit', { 'id' : contact.id }) }}"><em class="fa fa-pencil"></em></a>
+                                        <a class="btn btn-danger btn--action" title="Delete" href="{{ path('contact_remove', { 'id' : contact.id }) }}"><em class="fa fa-trash"></em></a>
                                     </td>
                                 </tr>
                             {% endfor %}
