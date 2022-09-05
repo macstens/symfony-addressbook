@@ -37,4 +37,4 @@ The Symfony Standard Edition is configured with the following defaults:
   * Doctrine
   * PHP 7.0.8
 
-Any questions or feedback is welcome on github or email (which you or the HR team should know)
+Any questions or feedback is welcome on github
